@@ -8,6 +8,7 @@ import { ProductService } from '../shared/product.service';
     styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
+    errorMessage: any;
     pageTitle: string = "John`s product";
     imageWidth: number = 50;
     imageMargin: number = 2;
@@ -22,11 +23,11 @@ export class ProductListComponent implements OnInit {
         this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
     }
     filteredProducts: IProduct[];
-    products: IProduct[] ;
+    products: IProduct[];
 
-     constructor( private _productService  : ProductService){
-         this.filteredProducts= this.products;
-     }
+    constructor(private _productService: ProductService) {
+        this.filteredProducts = this.products;
+    }
     performFilter(filterBy: string): IProduct[] {
         filterBy = filterBy.toLocaleLowerCase();
         return this.products.filter((product: IProduct) =>
@@ -38,8 +39,14 @@ export class ProductListComponent implements OnInit {
         this.showImage = !this.showImage;
     }
     ngOnInit(): void {
-        this.products= this._productService.getProducts();
-        this.filteredProducts= this.products;
-    }
+        this._productService.getProducts().subscribe(products =>{
+            this.products = products,
+            this.filteredProducts = this.products;
+        // this.products= this._productService.getProducts();
+        // this.filteredProducts= this.products;
+    },
+        error => this.errorMessage = <any>error);
 
+
+    }
 }
