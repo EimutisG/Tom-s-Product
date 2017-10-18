@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Provider } from '@angular/core';
 import { ProductService } from './shared/product.service';
 
 @Component({

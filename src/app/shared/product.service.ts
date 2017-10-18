@@ -3,6 +3,7 @@ import { IProduct } from '../product';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 import { HttpErrorResponse } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import 'rxjs/Rx';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
